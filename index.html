@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Меню на 14 дней · для двоих</title>
+  <style>
+    :root {
+      --ink: #26352e;
+      --muted: #66756d;
+      --paper: #fbf8f0;
+      --card: #fffdf8;
+      --green: #356b4d;
+      --green-light: #e7f0e5;
+      --orange: #d8794f;
+      --orange-light: #fae9df;
+      --line: #e8e4d9;
+      --gold: #a77a2f;
+      --shadow: 0 14px 36px rgba(38, 53, 46, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 95% 2%, rgba(217, 121, 79, .10), transparent 24rem),
+        radial-gradient(circle at 4% 18%, rgba(79, 132, 94, .09), transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--green); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: #214b34; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 58px 0 28px; }
+    .eyebrow { color: var(--green); font-size: .76rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { max-width: 800px; margin: 12px 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.4rem, 7vw, 5.1rem); font-weight: 500; letter-spacing: -.045em; line-height: .98; }
+    .lede { max-width: 740px; margin: 0; color: var(--muted); font-size: 1.08rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 23px; }
+    .chip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,253,248,.8); padding: 7px 12px; color: var(--ink); font-size: .88rem; }
+    .chip strong { color: var(--green); }
+    nav { position: sticky; top: 0; z-index: 5; border-block: 1px solid var(--line); background: rgba(251,248,240,.92); backdrop-filter: blur(12px); }
+    nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; }
+    nav a { flex: 0 0 auto; border-radius: 999px; padding: 7px 12px; color: var(--muted); font-size: .9rem; text-decoration: none; }
+    nav a:hover { background: var(--green-light); color: var(--green); }
+    main { padding: 24px 0 70px; }
+    section { margin-top: 38px; scroll-margin-top: 70px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 500; letter-spacing: -.025em; }
+    .section-note { max-width: 530px; margin: 0; color: var(--muted); font-size: .92rem; }
+    .budget-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .metric { min-height: 142px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 19px; box-shadow: var(--shadow); }
+    .metric .label { color: var(--muted); font-size: .84rem; }
+    .metric .value { display: block; margin: 7px 0 4px; color: var(--green); font-family: Georgia, "Times New Roman", serif; font-size: 2rem; line-height: 1.1; }
+    .metric small { color: var(--muted); }
+    .notice { margin-top: 14px; border-left: 4px solid var(--orange); border-radius: 0 14px 14px 0; background: var(--orange-light); padding: 14px 17px; }
+    .notice p { margin: 4px 0; }
+    .notice strong { color: #874c30; }
+    .week-label { display: inline-block; margin: 0 0 12px; border-radius: 999px; background: var(--green-light); padding: 6px 12px; color: var(--green); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .days { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .day { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 16px 18px 17px; box-shadow: 0 7px 20px rgba(38,53,46,.035); }
+    .day::before { position: absolute; inset: 0 auto 0 0; width: 4px; background: #9ab99b; content: ""; }
+    .day-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .day h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem; font-weight: 600; }
+    .meal { display: grid; grid-template-columns: 76px 1fr; gap: 7px; padding: 5px 0; }
+    .meal b { color: var(--green); font-size: .79rem; letter-spacing: .04em; text-transform: uppercase; }
+    .meal span { font-size: .94rem; }
+    .meal em { color: var(--muted); font-size: .86rem; font-style: normal; }
+    .drinkline { margin: 12px 0 0; border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); font-size: .84rem; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 11px 13px; text-align: left; vertical-align: top; }
+    th { background: #f1f3eb; color: var(--green); font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    td.price, th.price { text-align: right; white-space: nowrap; }
+    td.qty { white-space: nowrap; }
+    .group-row td { background: #f8f6ef; color: var(--gold); font-size: .82rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    tfoot td { background: var(--green-light); font-weight: 800; }
+    .ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .ledger-card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 15px 17px; }
+    .ledger-card h3 { margin: 0 0 7px; color: var(--green); font-size: 1rem; }
+    .ledger-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .recipe-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    details { border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 0 15px; }
+    details[open] { box-shadow: var(--shadow); }
+    details[id] { scroll-margin-top: 84px; }
+    details:target { border-color: var(--green); }
+    summary { cursor: pointer; padding: 13px 0; color: var(--green); font-weight: 750; }
+    summary::marker { color: var(--orange); }
+    details .recipe { border-top: 1px solid var(--line); padding: 11px 0 14px; color: var(--muted); font-size: .91rem; }
+    details p { margin: 0 0 8px; }
+    details p:last-child { margin-bottom: 0; }
+    .mini { color: var(--gold); font-size: .78rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .footnote { margin-top: 16px; color: var(--muted); font-size: .85rem; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0 36px; color: var(--muted); font-size: .85rem; }
+    @media (max-width: 740px) {
+      header { padding-top: 38px; }
+      .budget-grid { grid-template-columns: 1fr; }
+      .metric { min-height: auto; }
+      .days, .ledger, .recipe-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .meal { grid-template-columns: 68px 1fr; }
+    }
+    @media print {
+      body { background: white; }
+      nav { position: static; }
+      .day, .metric, .table-wrap, details { box-shadow: none; break-inside: avoid; }
+      details .recipe { display: block; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">План питания · 2 человека</div>
+    <h1>Две недели,<br>без лишних остатков</h1>
+    <p class="lede">Меню на 14 дней с закупкой целыми упаковками из каталога ВкусВилла. Весовые продукты указаны в граммах; количество фасованных продуктов и распределение по блюдам сведены в отдельную таблицу.</p>
+    <div class="chips">
+      <span class="chip"><strong>42</strong> приёма пищи</span>
+      <span class="chip"><strong>14</strong> дней</span>
+      <span class="chip"><strong>9 601 ₽</strong> продукты, напитки и снеки из сметы</span>
+      <span class="chip">Оборудование: плита и духовка</span>
+    </div>
+  </header>
+
+  <nav aria-label="Навигация по странице">
+    <div class="wrap">
+      <a href="#budget">Бюджет</a>
+      <a href="#menu">Меню</a>
+      <a href="#shopping">Список покупок</a>
+      <a href="#use-all">Как всё используется</a>
+      <a href="#recipes">Рецепты</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="budget">
+      <div class="section-head">
+        <h2>Смета и важные условия</h2>
+        <p class="section-note">Суммы рассчитаны по текущим ценам и фасовкам, полученным из MCP ВкусВилла. Для овощей и фруктов используется цена за килограмм и покупка на развес.</p>
+      </div>
+      <div class="budget-grid">
+        <article class="metric"><span class="label">Продукты, напитки и снеки</span><strong class="value">9 601 ₽</strong><small>Включены 5 л ультрапастеризованного молока, 5 л сока, фрукты, чипсы, шоколад и соусы.</small></article>
+        <article class="metric"><span class="label">Запас к лимиту 15 000 ₽</span><strong class="value">5 399 ₽</strong><small>Остаётся на изменение ассортимента и цен.</small></article>
+        <article class="metric"><span class="label">Покупки с упаковкой</span><strong class="value">0 остатков</strong><small>Количество каждой пачки, банки и бутылки разложено по рецептам; весовые продукты — ровно по граммам.</small></article>
+      </div>
+      <div class="notice">
+        <p><strong>Напитки к ужину:</strong> семь ужинов — сок по 300–400 мл на человека; в остальные семь ужинов — чай или кофе из домашних запасов. Чай и кофе в покупки не включены.</p>
+        <p><strong>Снеки к перекусам:</strong> четыре пачки чипсов по 100 г — каждая на один перекус для двоих; четыре плитки молочного шоколада по 90 г — по одной на перекус, поделить на двоих.</p>
+        <p>Соль и сухие специи считаются уже имеющимися дома и в смету не включены. Томатная паста и другие соусы допускают остаток по условию. Все остальные купленные ингредиенты используются полностью. Готовые порции на следующий день — запланированные блюда, а не остатки закупки.</p>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="section-head">
+        <h2>Меню по дням</h2>
+        <p class="section-note">Один раз готовятся 4 порции там, где указаны «остатки»: две порции съедаются на следующий обед. Сок и чай/кофе чередуются за ужином.</p>
+      </div>
+      <div class="week-label">Неделя 1</div>
+      <div class="days">
+        <article class="day"><div class="day-top"><h3>День 1</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-oatmeal">Овсянка с яблоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-lentil-soup">Чечевичный суп с рисом</a> <em>· 4 порции</em></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-oven">Курица в духовке с рисом</a></span></div><p class="drinkline">Перекус: яблоко. За ужином: сок — 300 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 2</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-millet">Пшённая каша с бананом</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-lentil-soup">Остаток чечевичного супа</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-tomato-pasta">Курица с томатными макаронами</a></span></div><p class="drinkline">Перекус: банан и плитка молочного шоколада 90 г на двоих. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 3</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-scramble">Яичница-болтунья с бородинским хлебом</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-chili">Фасолевое чили с рисом</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-frittata">Картофельная фриттата с овощами и сыром</a></span></div><p class="drinkline">Перекус: яблоко и пачка чипсов 100 г на двоих. За ужином: сок — 400 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 4</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-syrniki">Сырники · партия на 540 г творога</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-bean-pasta-salad">Салат из макарон, фасоли и огурца</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-cutlets">Куриные котлеты с гречкой</a> <em>· 4 порции</em></span></div><p class="drinkline">Перекус: фрукт и йогурт. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 5</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-oatmeal">Овсянка с бананом</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-cutlets">Котлеты, приготовленные накануне</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-lentil-pasta">Томатная паста из чечевицы с макаронами</a> <em>· 4 порции</em></span></div><p class="drinkline">За ужином: сок — 300 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 6</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-millet">Пшённая каша с яблоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-lentil-pasta">Остаток чечевичной пасты</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-soup">Куриный суп с рисом и картофелем</a> <em>· 4 порции</em></span></div><p class="drinkline">Перекус: яблоко и пачка чипсов 100 г на двоих. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 7</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-syrniki">Сырники · партия на 360 г творога</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-chicken-soup">Остаток куриного супа</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-pasta-bake">Запеканка из макарон с овощами и сыром</a></span></div><p class="drinkline">Перекус: банан и плитка молочного шоколада 90 г на двоих. За ужином: сок — 400 мл каждому.</p></article>
+      </div>
+
+      <div class="week-label" style="margin-top:28px">Неделя 2</div>
+      <div class="days">
+        <article class="day"><div class="day-top"><h3>День 8</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-oatmeal">Овсянка с яблоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-cucumber-pasta">Макаронный салат с огурцом и йогуртом</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-fried-rice">Жареный рис с яйцом и капустой</a></span></div><p class="drinkline">Перекус: фрукт и йогурт. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 9</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-millet">Пшённая каша с бананом</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-buckwheat">Гречневая сковорода с овощами</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-shakshuka">Шакшука, картофельные дольки и хлеб</a></span></div><p class="drinkline">Перекус: яблоко и плитка молочного шоколада 90 г на двоих. За ужином: сок — 300 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 10</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-oatmeal">Овсянка с яблоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-buckwheat">Гречка с капустой и морковью</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-rice-pan">Курица с рисом на сковороде</a></span></div><p class="drinkline">Перекус: банан и пачка чипсов 100 г на двоих. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 11</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-millet">Пшённая каша с яблоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-lentil-soup">Чечевичный суп с рисом</a> <em>· 4 порции</em></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-pasta">Курица с томатными макаронами</a></span></div><p class="drinkline">Перекус: фрукт. За ужином: сок — 400 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 12</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-oatmeal">Овсянка с бананом</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-lentil-soup">Остаток чечевичного супа</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-chicken-cabbage">Курица, тушённая с капустой, картофелем и рисом</a></span></div><p class="drinkline">Перекус: плитка молочного шоколада 90 г на двоих. За ужином: чай или кофе из домашних запасов.</p></article>
+        <article class="day"><div class="day-top"><h3>День 13</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-pancakes">Блины</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-buckwheat">Гречневая сковорода с овощами</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-egg-cheese-pasta">Макароны с яйцом и сыром</a></span></div><p class="drinkline">Перекус: банан и пачка чипсов 100 г на двоих. За ужином: сок — 400 мл каждому.</p></article>
+        <article class="day"><div class="day-top"><h3>День 14</h3></div><div class="meal"><b>Завтрак</b><span><a href="#recipe-rice-pudding">Рисовая каша с молоком</a></span></div><div class="meal"><b>Обед</b><span><a href="#recipe-bean-tomato-pasta">Томатные макароны с фасолью</a></span></div><div class="meal"><b>Ужин</b><span><a href="#recipe-tortilla">Картофельная тортилья с капустой</a></span></div><p class="drinkline">Перекус: яблоко. За ужином: чай или кофе из домашних запасов.</p></article>
+      </div>
+    </section>
+
+    <section id="shopping">
+      <div class="section-head">
+        <h2>Закупка целыми упаковками</h2>
+        <p class="section-note">Нажмите на название, чтобы открыть товар в каталоге. Весовые покупки указаны точным весом; фасованные — количеством упаковок и полным использованием.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Товар из каталога</th><th>Купить</th><th>Как используется</th><th class="price">Сумма</th></tr></thead>
+          <tbody>
+            <tr class="group-row"><td colspan="4">Крупы, мука и хлеб · 997 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/gerkules-ovsyanye-khlopya-1248/">Овсяные хлопья, 400 г</a></td><td class="qty">2 × 400 г</td><td>5 завтраков по 160 г — всего 800 г</td><td class="price">108 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/psheno-shlifovannoe-24753/">Пшено, 500 г</a></td><td class="qty">1 × 500 г</td><td>4 завтрака по 125 г</td><td class="price">48 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/krupa-grechnevaya-yadritsa-17699/">Гречка, 900 г</a></td><td class="qty">1 × 900 г</td><td>4 блюда по 225 г</td><td class="price">93 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/ris-kruglozernyy-shlifovannyy-59756/">Рис, 900 г</a></td><td class="qty">2 × 900 г</td><td>9 рецептов по 200 г — 1 800 г</td><td class="price">292 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/makaronnye-izdeliya-perya-gruppa-b-66491/">Макароны, 400 г</a></td><td class="qty">4 × 400 г</td><td>8 блюд по 200 г — 1 600 г</td><td class="price">184 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/muka-pshenichnaya-tselnozernovaya-24574/">Мука цельнозерновая, 500 г</a></td><td class="qty">1 × 500 г</td><td>Блины 180 г; сырники 100 г; котлеты 80 г; курица 80 г; соусы 60 г</td><td class="price">80 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/khleb-borodinskiy-111206/">Хлеб «Бородинский», 170 г</a></td><td class="qty">4 × 170 г</td><td>Яичный завтрак, две партии чечевичного супа и шакшука — все 680 г</td><td class="price">192 ₽</td></tr>
+
+            <tr class="group-row"><td colspan="4">Белок и молочные продукты · 4 738 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/chechevitsa-krasnaya-36616/">Чечевица красная, 450 г</a></td><td class="qty">2 × 450 г</td><td>3 блюда по 300 г — всего 900 г</td><td class="price">280 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/fasol-krasnaya-bez-dob-sakhara-108684/">Фасоль красная, 400 г</a></td><td class="qty">3 × 400 г</td><td>Чили, салат из макарон, томатные макароны — 1 200 г</td><td class="price">348 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/yaytso-kurinoe-esh-khoroshee-s1-beloe-10-sht-109644/">Яйца С1, 10 шт.</a></td><td class="qty">3 × 10 шт.</td><td>30 яиц распределены по завтракам, фриттате, рису, шакшуке и тортилье</td><td class="price">441 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/tvorog-5-27695/">Творог 5%, 180 г</a></td><td class="qty">5 × 180 г</td><td>Сырники: 540 г в первый день и 360 г во второй</td><td class="price">570 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/moloko-ekoniva-ultrapasterizovannoe-2-110135/">Молоко ультрапастеризованное, 1 л</a></td><td class="qty">5 × 1 л</td><td>Кофе 1,5 л; каши 2 л; блины 250 мл; рисовая каша 300 мл; котлеты 250 мл; запеканка 300 мл; соусы 400 мл</td><td class="price">675 ₽*</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/yogurt-grecheskiy-2-118658/">Йогурт греческий, 120 г</a></td><td class="qty">4 × 120 г</td><td>Две порции к сырникам и две заправки/маринада</td><td class="price">272 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/syr-rossiyskiy-narezka-16963/">Сыр «Российский», 150 г</a></td><td class="qty">1 × 150 г</td><td>Фриттата 50 г, запеканка 50 г, макароны с яйцом 50 г</td><td class="price">220 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/maslo-slivochnoe-ekoniva-82-110130/">Масло сливочное, 180 г</a></td><td class="qty">1 × 180 г</td><td>70 г на 14 завтраков; 110 г на 22 горячих блюда по 5 г</td><td class="price">209 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/bedro-tsyplenka-broylera-18580/">Бедро цыплёнка-бройлера</a></td><td class="qty">3 кг на развес</td><td>6 блюд по 500 г</td><td class="price">1 374 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/farsh-iz-tsyplyat-broylerov-21194/">Фарш из цыплёнка, 500 г</a></td><td class="qty">1 × 500 г</td><td>Котлеты на ужин и следующий обед</td><td class="price">349 ₽</td></tr>
+
+            <tr class="group-row"><td colspan="4">Овощи и фрукты на развес · 1 368 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/tomaty-krasnye-15456/">Томаты красные</a></td><td class="qty">2 кг</td><td>Супы и томатные соусы — 2 000 г</td><td class="price">540 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/luk-repchatyy-605/">Лук репчатый</a></td><td class="qty">1 кг</td><td>10 овощных основ по 100 г</td><td class="price">58 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/morkov-606/">Морковь</a></td><td class="qty">1 кг</td><td>10 овощных основ по 100 г</td><td class="price">53 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/kapusta-belokochannaya-602/">Капуста белокочанная</a></td><td class="qty">2 кг</td><td>Суп, гарниры, тушение и тортилья — 2 000 г</td><td class="price">96 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/kartofel-1713/">Картофель</a></td><td class="qty">3 кг</td><td>Фриттата 500 г; суп 500 г; гарнир 500 г; рагу 700 г; тортилья 800 г</td><td class="price">162 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/ogurtsy-gladkie-16645/">Огурцы гладкие</a></td><td class="qty">500 г</td><td>Два салата по 250 г</td><td class="price">60 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/yabloko-sadovoe-19767/">Яблоки садовые</a></td><td class="qty">1,5 кг</td><td>500 г в завтраки, 1 кг в перекусы</td><td class="price">147 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/banany-731/">Бананы</a></td><td class="qty">1,5 кг</td><td>500 г в завтраки, 1 кг в перекусы</td><td class="price">252 ₽</td></tr>
+
+            <tr class="group-row"><td colspan="4">Снеки · 1 508 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/chipsy-kartofelnye-s-solyu-26751/">Чипсы картофельные с солью, 100 г</a></td><td class="qty">4 × 100 г</td><td>4 перекуса для двоих, по одной пачке за раз</td><td class="price">580 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/shokolad-molochnyy-102607/">Шоколад молочный, 90 г</a></td><td class="qty">4 × 90 г</td><td>4 перекуса для двоих, по одной плитке на двоих</td><td class="price">928 ₽</td></tr>
+
+            <tr class="group-row"><td colspan="4">Напитки, замороженные овощи и соусы · 990 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/smes-ovoshchnaya-zavtrak-v-derevne-83375/">Смесь «Завтрак в деревне», 200 г</a></td><td class="qty">2 × 200 г</td><td>Фриттата 200 г и запеканка 200 г</td><td class="price">190 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/sok-yablochnyy-vosstanovlennyy-119866/">Сок яблочный, 1 л</a></td><td class="qty">2 × 1 л</td><td rowspan="3">7 ужинов: 3 × 300 мл и 4 × 400 мл на человека — ровно 5 л. Вкусы можно чередовать.</td><td class="price">304 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/sok-sady-pridonya-yabloko-vishnya-osvetlennyy-vosstanovlennyy-1-l-66783/">Сок яблочно-вишнёвый, 1 л</a></td><td class="qty">2 × 1 л</td><td class="price">272 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/sok-sady-pridonya-yablochno-abrikosovyy-s-myakotyu-vosstanovlennyy-1-l-79716/">Сок яблочно-абрикосовый, 1 л</a></td><td class="qty">1 × 1 л</td><td class="price">136 ₽</td></tr>
+            <tr><td><a href="https://vkusvill.ru/goods/tomatnaya-pasta-mini-format-piramidka-80956/">Томатная паста, 70 г</a></td><td class="qty">2 × 70 г</td><td>Соус; допускается остаток</td><td class="price">88 ₽</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="3">Итого</td><td class="price">9 601 ₽</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="footnote">* Цены MCP: ультрапастеризованное молоко — 135 ₽ по карте онлайн до 30 ноября (обычная цена 149 ₽); яблочно-вишнёвый и яблочно-абрикосовый соки — по 136 ₽ онлайн до 30 ноября (обычная цена 165 ₽). Если скидки недоступны, смета вырастет на 157 ₽. Цены на весовые продукты рассчитаны пропорционально цене за кг.</p>
+      <div class="notice"><p><strong>План покупок по срокам хранения:</strong> молоко можно хранить закрытым; хлеб и скоропортящиеся продукты удобнее покупать двумя партиями. Куриные порции сразу заморозить, если покупаются заранее. Купленный вес овощей и фруктов — суммарный за две недели, распределить по двум закупкам.</p></div>
+    </section>
+
+    <section id="use-all">
+      <div class="section-head">
+        <h2>Контроль полного использования</h2>
+        <p class="section-note">Проверка фасовок и распределения по рецептам. Соусы — исключение по условию; рис, крупы, яйца и овощные смеси используются полностью.</p>
+      </div>
+      <div class="ledger">
+        <article class="ledger-card"><h3>Крупы, макароны и бобовые</h3><p>Овсянка 800 г = 5 × 160 г; пшено 500 г = 4 × 125 г; гречка 900 г = 4 × 225 г; рис 1 800 г = 9 × 200 г; макароны 1 600 г = 8 × 200 г; чечевица 900 г = 3 × 300 г; фасоль 1 200 г = 3 × 400 г.</p></article>
+        <article class="ledger-card"><h3>Яйца, творог, мука и сыр</h3><p>30 яиц распределены по завтраку, фриттате, котлетам, рису, шакшуке, блинам, пасте, рисовой каше и тортилье. Творог: 540 г + 360 г. Мука 500 г: блины 180 г, сырники 100 г, котлеты 80 г, курица 80 г, соусы 60 г. Сыр 150 г: 3 × 50 г.</p></article>
+        <article class="ledger-card"><h3>Мясо, молоко и йогурт</h3><p>Куриные бёдра: 6 × 500 г; фарш 500 г — один замес котлет. Молоко 5 л: кофе 1,5 л, каши 2 л, блины 250 мл, рисовая каша 300 мл, котлеты 250 мл, запеканка 300 мл, соусы 400 мл. Йогурт 480 г — две порции к сырникам и две салатные заправки.</p></article>
+        <article class="ledger-card"><h3>Овощи, фрукты и перекусы</h3><p>Томаты 2 кг, лук 1 кг, морковь 1 кг, капуста 2 кг, картофель 3 кг, огурец 500 г — распределены по рецептам. По 1,5 кг яблок и бананов: по 500 г в завтраки и по 1 кг в перекусы. Дополнительно: 4 пачки чипсов по 100 г и 4 плитки шоколада по 90 г — все упаковки съедаются за отдельные перекусы. Сок 5 л разных вкусов используется за 7 ужинов: три порции по 300 мл и четыре по 400 мл каждому.</p></article>
+        <article class="ledger-card"><h3>Полные фасовки</h3><p>4 пачки хлеба по 170 г; 2 смеси овощей по 200 г; 5 коробок сока по 1 л; 4 пачки чипсов по 100 г; 4 плитки шоколада по 90 г — использованы полностью. Сливочное масло 180 г: 70 г на завтраки и 110 г на горячие блюда. Все эти упаковки включены в расчёт.</p></article>
+        <article class="ledger-card"><h3>Соусы и домашние запасы</h3><p>Томатная паста может остаться. Соль и сухие специи не добавлены к покупкам: используются домашние запасы. Если их нет, выберите специи в маленьких порционных упаковках и учтите их цену отдельно.</p></article>
+      </div>
+    </section>
+
+    <section id="recipes">
+      <div class="section-head">
+        <h2>Рецепты</h2>
+        <p class="section-note">Все блюда рассчитаны на двоих, кроме отмеченных партий на четыре порции. Можно приготовить на плите или в обычной духовке; блендер и специализированные приборы не нужны.</p>
+      </div>
+      <div class="recipe-grid">
+        <details><summary>Овсяная каша с фруктом · 2 порции</summary><div class="recipe"><p><span class="mini">На одну готовку</span><br>160 г хлопьев, 200 мл молока, 250 мл воды, 100 г яблока или банана, 5 г масла.</p><p>Доведите молоко с водой до кипения, всыпьте хлопья и варите 5–8 минут, помешивая. Добавьте фрукт и масло. Повторить ровно 5 раз — вся овсянка будет использована.</p></div></details>
+        <details><summary>Пшённая каша с фруктом · 2 порции</summary><div class="recipe"><p><span class="mini">На одну готовку</span><br>125 г пшена, 250 мл молока, 250 мл воды, 5 г масла, фрукт.</p><p>Промойте пшено, варите в смеси воды и молока 15–20 минут на слабом огне. Добавьте фрукт и масло. Приготовить 4 раза — ровно 500 г пшена.</p></div></details>
+        <details><summary>Сырники · две разные партии</summary><div class="recipe"><p><span class="mini">Первая партия</span><br>540 г творога, 2 яйца, 60 г муки. Сформируйте сырники и обжарьте на слабом огне по 3–4 минуты с каждой стороны.</p><p><span class="mini">Вторая партия</span><br>360 г творога, 1 яйцо, 40 г муки. Готовьте так же. К каждой подаче используйте одну упаковку йогурта 120 г как соус. Так расходуются все 5 пачек творога.</p></div></details>
+        <details><summary>Блины · 2 порции</summary><div class="recipe"><p>Смешайте 180 г муки, 3 яйца, 250 мл молока и щепотку соли до однородности. Жарьте тонкие блины на сковороде, используя часть сливочного масла для смазывания.</p><p>Подавайте с фруктом. Вся купленная мука для теста не требуется: оставшаяся распределяется по сырникам, котлетам, панировке курицы и загущению соусов согласно ведомости.</p></div></details>
+        <details><summary>Рисовая каша с бананом · 2 порции</summary><div class="recipe"><p>Промойте 200 г риса. Варите в 300 мл молока и примерно 500 мл воды на слабом огне, периодически помешивая, до мягкости. В конце вмешайте 1 взбитое яйцо тонкой струйкой и прогрейте ещё минуту. Добавьте 100 г банана и 5 г масла.</p></div></details>
+        <details><summary>Яичница-болтунья с хлебом · 2 порции</summary><div class="recipe"><p>Растопите 5 г сливочного масла на слабом огне, влейте 4 слегка взбитых яйца и перемешивайте до мягкой готовности. Подайте с целой упаковкой бородинского хлеба 170 г.</p></div></details>
+        <details><summary>Чечевичный суп с рисом · 4 порции</summary><div class="recipe"><p>На одну кастрюлю: 300 г красной чечевицы, 200 г риса, 150 г томатов, по 100 г лука и моркови, вода и 5 г масла. Обжарьте овощи, добавьте крупы и воду. Варите 20–25 минут. Разделите на обед первого и второго дня, подавайте с 170 г хлеба на оба обеда. Повторите во второй неделе с новой порцией продуктов.</p></div></details>
+        <details><summary>Курица в духовке с рисом · 2 порции</summary><div class="recipe"><p>В форму положите 500 г куриных бёдер, 200 г промытого риса, по 100 г лука и моркови, 450 мл горячей воды и 5 г масла. Накройте фольгой, запекайте при 190 °C около 50 минут и проверьте готовность курицы и риса. Для подливы размешайте 15 г муки в соке из формы и прогрейте на плите.</p></div></details>
+        <details><summary>Фасолевое чили с рисом · 2 порции</summary><div class="recipe"><p>Возьмите 400 г фасоли из банки, 200 г риса, 300 г томатов, по 100 г лука и моркови. Сварите рис. Овощи потушите с фасолью, томатами и небольшим количеством воды 12–15 минут; подайте с рисом.</p></div></details>
+        <details><summary>Курица с томатными макаронами · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон. Нарежьте 500 г курицы небольшими кусочками, слегка обваляйте в 80 г муки и обжарьте. Добавьте 250 г томатов, 100 г лука и 100 г моркови, немного воды и 100 мл молока. Потушите до полной готовности курицы, смешайте с макаронами.</p></div></details>
+        <details><summary>Картофельная фриттата · 2 порции</summary><div class="recipe"><p>Нарежьте 500 г картофеля и обжарьте до мягкости. Добавьте целую упаковку смеси «Завтрак в деревне» 200 г. Влейте 4 взбитых яйца, сверху распределите 50 г сыра. Готовьте под крышкой на слабом огне или допеките в духовке. Используйте 5 г масла.</p></div></details>
+        <details><summary>Паста-салат с фасолью · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон и остудите. Смешайте с целой банкой фасоли 400 г, 250 г огурца и одной упаковкой йогурта 120 г. Приправьте домашними солью и перцем. Готовить непосредственно перед обедом.</p></div></details>
+        <details><summary>Куриные котлеты с гречкой · 4 порции</summary><div class="recipe"><p>Смешайте целую упаковку фарша 500 г, 1 яйцо, 250 мл молока и 80 г муки; сформируйте котлеты. Обжарьте под крышкой до готовности. Отдельно сварите 225 г гречки. Подавайте две порции на ужин, две — на следующий обед.</p></div></details>
+        <details><summary>Паста из чечевицы с томатом · 4 порции</summary><div class="recipe"><p>Обжарьте по 100 г лука и моркови, добавьте 300 г чечевицы, 300 г томатов и воду. Варите до мягкости чечевицы. Смешайте с 200 г отваренных макарон. Используйте 100 мл молока для смягчения соуса. Часть оставьте на следующий обед.</p></div></details>
+        <details><summary>Куриный суп с рисом и картофелем · 4 порции</summary><div class="recipe"><p>Сварите 500 г куриных бёдер в воде, снимите пену. Добавьте 200 г риса, 500 г картофеля, 300 г капусты, по 100 г лука и моркови. Варите до готовности курицы и овощей. Разделите на ужин и следующий обед.</p></div></details>
+        <details><summary>Запеканка из макарон · 2 порции</summary><div class="recipe"><p>Смешайте 200 г отваренных макарон, целую упаковку овощной смеси 200 г, 300 мл молока и 50 г сыра. Выложите в форму, запекайте около 20 минут при 190 °C. Используйте 5 г масла для формы.</p></div></details>
+        <details><summary>Макаронный салат с огурцом · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон, остудите и смешайте с 250 г огурца и упаковкой йогурта 120 г. Это использует вторую половину огурцов и одну упаковку йогурта.</p></div></details>
+        <details><summary>Жареный рис с яйцом · 2 порции</summary><div class="recipe"><p>Лучше сварить 200 г риса заранее. На сковороде прогрейте 200 г нашинкованной капусты, 100 г лука и 100 г моркови, добавьте рис и 4 яйца. Перемешивайте до готовности яиц. Используйте 5 г масла.</p></div></details>
+        <details><summary>Гречневая сковорода с овощами · 2 порции</summary><div class="recipe"><p>Каждый раз сварите 225 г гречки. Для трёх обеденных порций обжарьте по 200 г нашинкованной капусты и 100 г моркови; одну порцию с котлетами подайте без капусты. Приготовить 4 раза — весь пакет гречки будет использован.</p></div></details>
+        <details><summary>Шакшука с картофелем · 2 порции</summary><div class="recipe"><p>Обжарьте 400 г томатов и 100 г лука, добавьте немного воды и тушите до соуса. Сделайте 4 углубления, вбейте яйца и готовьте под крышкой. Одновременно запеките 500 г картофельных долек. Подавайте с целой упаковкой хлеба 170 г.</p></div></details>
+        <details><summary>Курица с рисом на сковороде · 2 порции</summary><div class="recipe"><p>Обжарьте 500 г курицы с 100 г лука и 100 г моркови. Добавьте 200 г риса, залейте горячей водой, накройте крышкой и готовьте до мягкости. Добавьте 100 мл молока и 15 г муки, размешанной в холодной воде, для соуса. Используйте 5 г масла.</p></div></details>
+        <details><summary>Курица с макаронами · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон. Обжарьте 500 г курицы с 100 г лука и 100 г моркови, добавьте 250 г томатов и немного воды. Потушите до готовности и смешайте с макаронами. Для соуса используйте 100 мл молока и 15 г муки, разведённой холодной водой; добавьте 5 г масла.</p></div></details>
+        <details><summary>Курица с капустой, картофелем и рисом · 2 порции</summary><div class="recipe"><p>Обжарьте 500 г курицы с 700 г капусты. Добавьте 700 г картофеля и 200 г риса, влейте воду и тушите под крышкой до готовности. Для загущения соуса размешайте 15 г муки в холодной воде; используйте 5 г масла.</p></div></details>
+        <details><summary>Макароны с яйцом и сыром · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон. Снимите кастрюлю с огня, вмешайте 2 яйца и 50 г сыра, быстро перемешайте с парой ложек горячей воды от варки и прогрейте на минимальном огне до готовности яиц.</p></div></details>
+        <details><summary>Томатные макароны с фасолью · 2 порции</summary><div class="recipe"><p>Отварите 200 г макарон. Потушите целую банку фасоли 400 г с 200 г томатов. Смешайте с макаронами. Используйте томатную пасту по желанию; её остаток допускается.</p></div></details>
+        <details><summary>Картофельная тортилья с капустой · 2 порции</summary><div class="recipe"><p>Тонко нарежьте 800 г картофеля и обжарьте под крышкой до мягкости. Добавьте 200 г капусты и прогрейте. Влейте 4 взбитых яйца и готовьте под крышкой на слабом огне до схватывания. Используйте 5 г масла.</p></div></details>
+      </div>
+      <p class="footnote">Чтобы не выбрасывать готовую еду, супы и блюда на четыре порции делятся на ужин/обед следующего дня. Скоропортящиеся товары покупайте партиями; фасовки сухих продуктов в таблице рассчитаны на полное использование.</p>
+    </section>
+  </main>
+  <footer><div class="wrap">План составлен по каталогу ВкусВилла и ценам, полученным через MCP. Перед заказом проверьте наличие и актуальные скидки в выбранном магазине.</div></footer>
+  <script>
+    const recipeIds = new Map([
+      ["Овсяная каша с фруктом · 2 порции", "recipe-oatmeal"],
+      ["Пшённая каша с фруктом · 2 порции", "recipe-millet"],
+      ["Сырники · две разные партии", "recipe-syrniki"],
+      ["Блины · 2 порции", "recipe-pancakes"],
+      ["Рисовая каша с бананом · 2 порции", "recipe-rice-pudding"],
+      ["Яичница-болтунья с хлебом · 2 порции", "recipe-scramble"],
+      ["Чечевичный суп с рисом · 4 порции", "recipe-lentil-soup"],
+      ["Курица в духовке с рисом · 2 порции", "recipe-chicken-oven"],
+      ["Фасолевое чили с рисом · 2 порции", "recipe-chili"],
+      ["Курица с томатными макаронами · 2 порции", "recipe-chicken-tomato-pasta"],
+      ["Картофельная фриттата · 2 порции", "recipe-frittata"],
+      ["Паста-салат с фасолью · 2 порции", "recipe-bean-pasta-salad"],
+      ["Куриные котлеты с гречкой · 4 порции", "recipe-cutlets"],
+      ["Паста из чечевицы с томатом · 4 порции", "recipe-lentil-pasta"],
+      ["Куриный суп с рисом и картофелем · 4 порции", "recipe-chicken-soup"],
+      ["Запеканка из макарон · 2 порции", "recipe-pasta-bake"],
+      ["Макаронный салат с огурцом · 2 порции", "recipe-cucumber-pasta"],
+      ["Жареный рис с яйцом · 2 порции", "recipe-fried-rice"],
+      ["Гречневая сковорода с овощами · 2 порции", "recipe-buckwheat"],
+      ["Шакшука с картофелем · 2 порции", "recipe-shakshuka"],
+      ["Курица с рисом на сковороде · 2 порции", "recipe-chicken-rice-pan"],
+      ["Курица с макаронами · 2 порции", "recipe-chicken-pasta"],
+      ["Курица с капустой, картофелем и рисом · 2 порции", "recipe-chicken-cabbage"],
+      ["Макароны с яйцом и сыром · 2 порции", "recipe-egg-cheese-pasta"],
+      ["Томатные макароны с фасолью · 2 порции", "recipe-bean-tomato-pasta"],
+      ["Картофельная тортилья с капустой · 2 порции", "recipe-tortilla"]
+    ]);
+
+    document.querySelectorAll("#recipes details").forEach((recipe) => {
+      const title = recipe.querySelector("summary")?.textContent.trim();
+      const id = recipeIds.get(title);
+      if (id) recipe.id = id;
+    });
+
+    function revealLinkedRecipe() {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target?.tagName.toLowerCase() === "details") target.open = true;
+    }
+    window.addEventListener("hashchange", revealLinkedRecipe);
+    revealLinkedRecipe();
+  </script>
+</body>
+</html>
